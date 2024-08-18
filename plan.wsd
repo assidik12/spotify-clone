@@ -1,0 +1,118 @@
+@startuml
+
+entity Artist {
+* id : varchar
+--
+* name : varchar
+instagram : varchar
+twitter : varchar
+wikipedia : varchar
+bio : text
+}
+
+entity Song {
+* id : varchar
+--
+* album_id : varchar
+* title : varchar
+* duration : int
+}
+
+entity Album{
+* id : varchar
+--
+* title : varchar
+* release : year
+* image : varchar
+}
+
+entity Playlist{
+* id : varchar
+--
+ * name : varchar
+ description : text
+ image : varchar
+ Category_id : varchar
+ * user_id : varchar
+}
+
+
+entity Category{
+* id : varchar
+--
+* name : varchar
+* image : varchar
+* icon : varchar
+}
+entity PlaylistCategory{
+* id : varchar
+--
+* name : varchar
+* image : varchar
+* icon : varchar
+}
+entity PodacastCategory{
+* id : varchar
+--
+* name : varchar
+* image : varchar
+* icon : varchar
+}
+
+entity Podcast{
+* id : varchar
+--
+ * name : varchar
+ description : text
+ about : varchar
+ image : varchar
+ Category_id : varchar
+ * user_id : varchar
+}
+
+entity Episode{
+* id : varchar
+--
+* title : varchar
+* Podcast_id : varchar
+description : text
+publised_at : date
+duration : int
+}
+
+
+entity User{
+* id : varchar
+--
+* email : varchar
+* name : varchar
+birthday : date
+}
+
+
+entity Concert{
+id : varchar
+--
+* location : varchar
+* event_at : date
+* url : varchar
+lon : double
+lat : double
+}
+
+Artist }|--|{ Album : Has
+Album ||--|{ Song : Contains
+Artist }|--|{ Song : Sing
+PlaylistCategory |o--|{ Playlist : Contains
+User ||--o{ Playlist : Create Playlist
+Playlist }o--o{ Song : Contains
+PodacastCategory |o--|{ Podcast : Contains
+User ||--o{ Podcast : Create
+Podcast ||--o{ Episode : contains
+Artist }|--o{ Concert : Perform
+User }o--o{ Artist : follow
+User }o--o{ Song : like song
+User }o--o{ Playlist : follow
+
+
+@enduml
